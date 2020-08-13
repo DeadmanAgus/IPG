@@ -1,0 +1,11 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.class
+build/
+*.csv
+target/**
+
+### Eclipse ###
+.project
+.settings/

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/main.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<div class="container" id="main-content">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="connect">WebSocket connection:</label>
+                    <button class="btn btn-default" id="connect" type="submit">Connect</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <button class="btn btn-default" disabled="disabled" id="disconnect" type="submit">
+                        Disconnect
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+	                <table>
+					  <tr>
+					    <td><label for="destination">WS Path:</label></td>
+					    <td>
+					    	<input class="form-control" id="destination" type="text" value="/app/evse/create">
+	                		<button class="btn btn-default" id="send" type="submit" disabled>Send</button>
+						</td>
+					  </tr>
+					  <tr>
+					    <td><label for="inputJson">Input Json:</label></td>
+					    <td><textarea class="form-control" id="inputJson" placeholder="Input Json..." rows="10" cols="80"></textarea></td>
+					  </tr>
+					  <tr>
+					    <td><label for="response">Response:</label></td>
+					    <td><textarea class="form-control" id="response" placeholder="Response......" rows="10" cols="80"></textarea></td>
+					  </tr>
+					</table>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>
