@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+      
+  postgres:
+    image: spryhealth/facade_spry
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  iotecha-protocol-gateway:
+    image: nuvve/iotecha-protocol-gateway
+    depends_on:
+      - rabbitmq
+      - postgres
+    ports:
+      - 8083:80
+      
+
