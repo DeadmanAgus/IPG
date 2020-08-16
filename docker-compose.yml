@@ -1,26 +1,53 @@
 version: '3.5'
 
 services:
+
+# Rabbit MQ did not work due to issues with volumes, it does not keep credentials after restarting.
   rabbitmq:
     image: rabbitmq:3-management
     ports:
       - 5672:5672
+      - 15672:15672
+    container_name: rabbitmq
+    hostname: rabbitmq
     volumes:
-      - ./rabbitmq:/var/lib/rabbitmq
-      
+      - rabbitmq:/var/lib/rabbitmq
+
+#Postgress image      
   postgres:
     image: postgres
     ports:
       - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD:"postgres"
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
+# APP Image      
+  # Could build first and then just grab the image (spotify plug in needed):
   iotecha-protocol-gateway:
-    image: nuvve/iotecha-protocol-gateway
+    image: iotecha-protocol-gateway
     depends_on:
       - rabbitmq
       - postgres
     ports:
-      - 8083:80
+      - 8090:8090
+ 
+  # Or (spotify plug it not needed) could build on the fly (jar files need to exist in the target dir as docker file needs it to generate the image)
+  # Could have selected an image from FROM maven:3.6.1-jdk-11 (in the docker file) and then all would be automated
+#  app:
+#    build: .
+#    ports:
+#      - 8090:8090
+#    depends_on:
+#      - rabbitmq
+#      - postgres
       
-
+# Volumes
+volumes:
+  rabbitmq:
+#    external: true
+    driver: local
+  postgres:
+    external: true
+    
