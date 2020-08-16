@@ -6,14 +6,14 @@ services:
     ports:
       - 5672:5672
     volumes:
-      - rabbitmq:/var/lib/rabbitmq
+      - ./rabbitmq:/var/lib/rabbitmq
       
   postgres:
-    image: spryhealth/facade_spry
+    image: postgres
     ports:
       - 5432:5432
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
 
   iotecha-protocol-gateway:
     image: nuvve/iotecha-protocol-gateway
